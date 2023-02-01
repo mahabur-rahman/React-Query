@@ -3,6 +3,7 @@ import RQ from "./components/RQ.page";
 import Home from "./components/Home.page";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,9 @@ function App() {
           </Switch>
         </div>
       </Router>
+
+      {/* dev tools of react query */}
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
 }
