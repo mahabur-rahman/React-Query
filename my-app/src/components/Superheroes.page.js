@@ -19,6 +19,7 @@ const Superheroes = () => {
       .catch((err) => {
         console.log(err);
         setErr(err.message);
+        setLoading(false);
       });
   }, []);
 
