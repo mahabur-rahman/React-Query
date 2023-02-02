@@ -4,6 +4,7 @@ import Home from "./components/Home.page";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import RQSuperHeroSingle from "./components/RQSuperHeroSingle";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +29,13 @@ function App() {
 
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/super-heroes" component={Superheroes} />
-            <Route path="/rq-heroes" component={RQ} />
+            <Route exact path="/super-heroes" component={Superheroes} />
+            <Route exact path="/rq-heroes" component={RQ} />
+            <Route
+              exact
+              path="/rq-heroes/:heroId"
+              component={RQSuperHeroSingle}
+            />
           </Switch>
         </div>
       </Router>
