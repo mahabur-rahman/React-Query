@@ -1,9 +1,23 @@
-import { useQuery } from "react-query";
-import axios from "axios";
+// import { useQuery } from "react-query";
+// import axios from "axios";
 
-// const fetchSuperHero = (heroId) => {
+// // const fetchSuperHero = (heroId) => {
+// //   return axios.get(`http://localhost:4000/superheroes/${heroId}`);
+// // };
+
+// const fetchSuperHero = ({ queryKey }) => {
+//   // query key is an array
+//   const heroId = queryKey[1];
 //   return axios.get(`http://localhost:4000/superheroes/${heroId}`);
 // };
+
+// export const useSuperHeroDetails = (heroId) => {
+//   //   return useQuery(["super-hero", heroId], () => fetchSuperHero(heroId)); // same as below
+//   return useQuery(["super-hero", heroId], fetchSuperHero);
+// };
+
+import { useQuery, useQueryClient } from "react-query";
+import axios from "axios";
 
 const fetchSuperHero = ({ queryKey }) => {
   const heroId = queryKey[1];
@@ -11,6 +25,19 @@ const fetchSuperHero = ({ queryKey }) => {
 };
 
 export const useSuperHeroDetails = (heroId) => {
-  //   return useQuery(["super-hero", heroId], () => fetchSuperHero(heroId)); // same as below
-  return useQuery(["super-hero", heroId], fetchSuperHero);
+  const queryClient = useQueryClient();
+
+  return useQuery(["super-hero", heroId], fetchSuperHero, {
+    
+    initialData: () => {
+      const hero = queryClient
+        .getQueryData("super-heroes")
+        ?.data?.find((hero) => hero.id === parseInt(heroId));
+      if (hero) {
+        return { data: hero };
+      } else {
+        return undefined;
+      }
+    },
+  });
 };

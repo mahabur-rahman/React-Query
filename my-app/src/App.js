@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import RQSuperHeroSingle from "./components/RQSuperHeroSingle";
+import Parallel from "./components/Parallel";
+import DynamicParallel from "./components/DynamicParallel";
+import DependentQueries from "./components/DependentQueries";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +39,15 @@ function App() {
               path="/rq-heroes/:heroId"
               component={RQSuperHeroSingle}
             />
+
+            <Route path="/rq-parallel" component={Parallel} />
+            <Route path="/rq-dynamic-parallel">
+              <DynamicParallel heroIds={[1, 3]} />
+            </Route>
+
+            <Route path="/rq-dependent">
+              <DependentQueries email="mahabur@gmail.com" />
+            </Route>
           </Switch>
         </div>
       </Router>
