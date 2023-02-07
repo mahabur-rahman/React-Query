@@ -10,6 +10,8 @@ import DynamicParallel from "./components/DynamicParallel";
 import DependentQueries from "./components/DependentQueries";
 import PaginatedQuery from "./components/PaginatedQuery";
 import InfiniteQueryPage from "./components/InfiniteQueryPage";
+import MutationSuperHero from "./components/MutationSuperHero";
+import MutationSinlgeSuperHero from "./components/MutationSinlgeSuperHero";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +57,13 @@ function App() {
             </Route>
             <Route path="/infinite">
               <InfiniteQueryPage />
+            </Route>
+
+            <Route exact path="/mutation">
+              <MutationSuperHero />
+            </Route>
+            <Route path="/mutation/:id">
+              <MutationSinlgeSuperHero />
             </Route>
           </Switch>
         </div>
